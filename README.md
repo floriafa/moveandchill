@@ -4,7 +4,7 @@ Das Tiefbauamt der Stadt Zürich gemeinsam mit dem EWZ und der ETH Zürich Sitzs
 
 In der Pilotphase wurden zwischen August und Oktober 2022 insgesamt 17 Sensoren am Vulkanplatz und am Münsterhof eingesetzt. 
 
-### Genauere Informationen:
+### Weitere Informationen:
 https://makezurich.ch/start/2/  
 https://ethz.ch/content/dam/ethz/special-interest/itet/center-pbl-dam/documents/projects/Move_and_Chill_Challenge_Flyer.pdf
 
