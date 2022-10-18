@@ -77,7 +77,7 @@ spdf[spdf$Wochentag == 7, "tagtyp"] = "Sonn- und Feiertag"
 spdf[spdf$Feiertag == 1, "tagtyp"] = "Sonn- und Feiertag"
 ```
 
-# Räumliche Zuordnung
+Räumliche Zuordnung:
 ```R
 # Mittelpunkte beider Plätze
 df.Orte = tribble(~Ort,          ~X,      ~Y,
