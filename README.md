@@ -16,3 +16,6 @@ https://github.com/DonGoginho/myPy/blob/main/plausis/plausi_messdaten/moveNDchil
 Die von den Sitzsensoren gesammelten Daten sind öffentlich zugänglich.  
 https://data.stadt-zuerich.ch/dataset/geo_move_and_chill  
 https://opendata.swiss/en/dataset/move-and-chill
+
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.pdf)
