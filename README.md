@@ -98,6 +98,11 @@ spdf[spdf$MUNS_M < Dist, "Ort"] = "Münsterhof"
 ```
 
 ## Ergebnisse:  
+
+
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/tage.png)
+
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert.   
 
 Es zeigt sich, dass die Nutzung der Stühle über den Zeitraum leicht abnimmt. Im Durchschnitt waren die Stühle am Münsterhof und Vulkanplatz in etwa zu 10 Prozent genutzt. Am Münsterhof ist die Auslastung etwas höher als am Vulkanplatz.
@@ -105,13 +110,35 @@ Es zeigt sich, dass die Nutzung der Stühle über den Zeitraum leicht abnimmt. I
 In den ersten Tagen wurden noch unrealistisch starke Nutzungen gemessen. Das konnte darauf zurückgeführt werden, dass die Stühle im Testlauf vor der Erhebung auf anderen Oberflächen platziert wurden. Nach einer Rekalibration werden plausible Werte gemeldet. 
 
 Am Münsterhof wurden für Veranstaltungen die Stühle Ende September entfernt. In diesem Zeitraum gab es keine Erhebungen am Münsterhof. Nachdem der Werkhof Anfang Oktober, die Zählgeräte wieder auf dem Münsterhof plaziert hat, konnten noch für die letzten zwei Tage der Erhebung Nutzungsinformationen ermittelt werden.
-![alt text](https://github.com/floriafa/moveandchill/blob/main/tage.png)
+
+```R
+
+
 
    
 An den Tagesgängen zeigt sich, dass beide Plätze sehr unterschiedliche Nutzungsprofile aufweisen. Der Münsterhof hat eine augeprägte Nachmittagsspitze, wo die Auslastung zwischen 14:30 und 16:30 auf über 30 Prozent ansteigt. Am Vulkanplatz ist die Auslastung am Morgen und am Abend ähnlich wie am Münsterhof. Am Nachmittag wird jedoch ein niedrigeres Auslastungsniveau von ca. 15 Prozent erreicht. 
 
 
+df.halbstund = spdf %>% st_drop_geometry %>% group_by(Ort, halbstund) %>% summarise(n = n(), 
+                                                                     mean_sit = mean(sit),
+                                                                     med_sit = median(sit)) 
 
+ggplot(df.halbstund %>% filter(Ort != "anderer Ort"), aes(x = halbstund + 0.25, y = mean_sit, color = Ort)) + 
+  scale_x_continuous(name = "",
+                     breaks=c(0:24),
+                     labels=c("0","","",
+                              "3","","",
+                              "6","","",
+                              "9","","",
+                              "12","","",
+                              "15","","",
+                              "18","","",
+                              "21","","", "24"))+ geom_line(size = 1) + theme_bw() + 
+  theme(axis.title.y = element_blank()) + 
+  labs(title = "Move and Chill: Tagesgang", 
+       subtitle = "gesamte Erhebungszeit, prozentuelle Auslastung des Sitzmobiliars, Halbstunden",
+       caption = "Auswertung Tiefbauamt Stadt Zürich")
+```
 ![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.png)
 
 Die einzelnen Wochentage zeigen gut, dass der Münsterhof besonders am Wochenende mehr Sitzende hat als der Vulkanplatz. Der Vulkanplatz verzeichnet gerade am Samstag sehr niedrige Auslastungswerte.
