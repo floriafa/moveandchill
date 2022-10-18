@@ -24,6 +24,11 @@ Einlesen der Erhebungsdaten:
 spdf <- geojsonsf::geojson_sf("https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Move_and_Chill?service=WFS&version=1.1.0&request=GetFeature&outputFormat=GeoJSON&typename=view_moveandchill")
 ```
 
+Transformation ins übliche Koordinatensystem "CH1903+ / LV95" EPSG Code: 2056
+```R
+spdf = st_transform(spdf, crs = 2056)
+```
+
 ## Ergebnisse:  
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert.   
 
