@@ -77,6 +77,26 @@ spdf[spdf$Wochentag == 7, "tagtyp"] = "Sonn- und Feiertag"
 spdf[spdf$Feiertag == 1, "tagtyp"] = "Sonn- und Feiertag"
 ```
 
+# Räumliche Zuordnung
+```R
+# Mittelpunkte beider Plätze
+df.Orte = tribble(~Ort,          ~X,      ~Y,
+                  "Münsterhof",  2683260, 1247170,
+                  "Vulkanplatz", 2679410, 1249590)
+spdf.Orte = st_as_sf(df.Orte, coords = c("X", "Y"))
+spdf.Orte = st_set_crs(spdf.Orte, st_crs(spdf))
+
+# Distanz in Metern zu beiden Platzmittelpunkten berechnen
+spdf$VULK_M = drop_units(st_distance(spdf, spdf.Orte[spdf.Orte$Ort == "Vulkanplatz",]))
+spdf$MUNS_M = drop_units(st_distance(spdf, spdf.Orte[spdf.Orte$Ort == "Münsterhof",]))
+
+# Zuweisen
+Dist = 500 # Zulässige Distanz vom Platzmittelpunkt für Zuweisung in Metern
+spdf$Ort = "anderer Ort"
+spdf[spdf$VULK_M < Dist, "Ort"] = "Vulkanplatz"
+spdf[spdf$MUNS_M < Dist, "Ort"] = "Münsterhof"
+```
+
 ## Ergebnisse:  
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert.   
 
