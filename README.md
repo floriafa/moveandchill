@@ -17,15 +17,13 @@ Die von den Sitzsensoren gesammelten Daten sind öffentlich zugänglich.
 https://data.stadt-zuerich.ch/dataset/geo_move_and_chill  
 https://opendata.swiss/en/dataset/move-and-chill
 
-## Code
+## Datenaufbereitung
 Genutzte Pakete:
 ```R
 library(tidyverse)
 library(sf)
 library(magrittr)
 library(units)
-library(lubridate)
-library(geojsonsf)
 ```
 
 Einlesen der Erhebungsdaten:
@@ -99,6 +97,7 @@ spdf[spdf$MUNS_M < Dist, "Ort"] = "Münsterhof"
 
 ## Ergebnisse:  
 
+### Tagesdurchschnitte
 ```R
 df.tage = spdf %>% st_drop_geometry %>% group_by(Ort, halbstund, DATE) %>% summarise(n = n(), sensoren = length(unique(sensor_eui)),
                                                                                      mean_sit = mean(sit),
@@ -132,7 +131,7 @@ In den ersten Tagen wurden noch unrealistisch starke Nutzungen gemessen. Das kon
 Am Münsterhof wurden für Veranstaltungen die Stühle Ende September entfernt. In diesem Zeitraum gab es keine Erhebungen am Münsterhof. Nachdem der Werkhof Anfang Oktober, die Zählgeräte wieder auf dem Münsterhof plaziert hat, konnten noch für die letzten zwei Tage der Erhebung Nutzungsinformationen ermittelt werden.
 
 
-
+### Tagesgänge
 ```R
 df.halbstund = spdf %>% st_drop_geometry %>% group_by(Ort, halbstund) %>% summarise(n = n(), 
                                                                      mean_sit = mean(sit),
@@ -160,7 +159,7 @@ ggplot(df.halbstund %>% filter(Ort != "anderer Ort"), aes(x = halbstund + 0.25, 
 An den Tagesgängen zeigt sich, dass beide Plätze sehr unterschiedliche Nutzungsprofile aufweisen. Der Münsterhof hat eine augeprägte Nachmittagsspitze, wo die Auslastung zwischen 14:30 und 16:30 auf über 30 Prozent ansteigt. Am Vulkanplatz ist die Auslastung am Morgen und am Abend ähnlich wie am Münsterhof. Am Nachmittag wird jedoch ein niedrigeres Auslastungsniveau von ca. 15 Prozent erreicht. 
 
 
-
+### Wochentage
 ```R
 # Wochentag
 df.WT = spdf %>% st_drop_geometry %>% filter(Ort != "anderer Ort") %>% group_by(Ort, halbstund, tagtyp) %>% summarise(n = n(), 
