@@ -33,3 +33,7 @@ An den Tagesgängen zeigt sich, dass beide Plätze sehr unterschiedliche Nutzung
 
 
 ![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.png)
+
+Die einzelnen Wochentage zeigen gut, dass der Münsterhof besonders am Wochenende mehr Sitzende hat als der Vulkanplatz. Der Vulkanplatz verzeichnet gerade am Samstag sehr niedrige Auslastungswerte.
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/wochentage.png)
