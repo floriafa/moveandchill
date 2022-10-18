@@ -18,4 +18,4 @@ https://data.stadt-zuerich.ch/dataset/geo_move_and_chill
 https://opendata.swiss/en/dataset/move-and-chill
 
 
-![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.pdf)
+![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.png)

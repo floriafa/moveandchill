@@ -121,7 +121,7 @@ ggplot(df.halbstund %>% filter(Ort != "anderer Ort"), aes(x = halbstund + 0.25, 
   labs(title = "Move and Chill: Tagesgang", 
        subtitle = "gesamte Erhebungszeit, prozentuelle Auslastung des Sitzmobiliars, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich")
-ggsave("Tagesgang.pdf", width = 29, height = 21, units = "cm")
+ggsave("Tagesgang.png", width = 10, height = 8, units = "cm")
 
 
 # Wochentag
@@ -147,7 +147,7 @@ ggplot(df.WT, aes(x = halbstund + 0.25, y = mean_sit, color = Ort)) + geom_line(
   labs(title = "Move and Chill: Tagesgang, Wochentage", 
        subtitle = "gesamte Erhebungszeit, prozentuelle Auslastung des Sitzmobiliars, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich")
-ggsave("wochentage.pdf", width = 29, height = 21, units = "cm")
+ggsave("wochentage.png", width = 10, height = 8, units = "cm")
 
 # Monat 
 df.mo = spdf %>% st_drop_geometry %>% filter(Ort != "anderer Ort") %>% group_by(Ort, halbstund, MONTH) %>% summarise(n = n(), 
@@ -169,7 +169,7 @@ ggplot(df.mo, aes(x = halbstund + 0.25, y = mean_sit, color = Ort)) + geom_line(
   labs(title = "Move and Chill: Tagesgang, Monate", 
        subtitle = "gesamte Erhebungszeit, prozentuelle Auslastung des Sitzmobiliars, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich")
-ggsave("monate.pdf", width = 29, height = 21, units = "cm")
+ggsave("monate.png", width = 10, height = 8, units = "cm")
 
 
 # Alle Tage
@@ -193,7 +193,7 @@ ggplot(df.tage2[df.tage2$Ort %in% c("Vulkanplatz", "Münsterhof"),],
   labs(title = "Move and Chill: Tagesdurchschnitte", 
        subtitle = "gesamte Erhebungszeit, prozentuelle Auslastung des Sitzmobiliars",
        caption = "Auswertung Tiefbauamt Stadt Zürich")
-ggsave("tage.pdf", width = 29, height = 21, units = "cm")
+ggsave("tage.png", width = 10, height = 8, units = "cm")
 
 # sit + Temperatur + Luftfeuchtigkeit
 
@@ -206,4 +206,4 @@ ggplot(df.tage2 %>% filter(Ort != "anderer Ort"),
   labs(title = "Move and Chill: Tagesdurchschnitte", 
        subtitle = "%-Auslastung des Sitzmobiliars, Temperatur rot, Luftfeuchtigkeit blau",
        caption = "Auswertung Tiefbauamt Stadt Zürich")
-ggsave("tage_wetter.pdf", width = 29, height = 21, units = "cm")
+ggsave("tage_wetter.png", width = 10, height = 8, units = "cm")
