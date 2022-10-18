@@ -19,7 +19,9 @@ https://opendata.swiss/en/dataset/move-and-chill
 
 ## Auswertung:  
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert. 
-Im 
+In den ersten Tagen wurden noch unrealistisch starke Nutzungen gemessen. Das konnte darauf zurückgeführt werden, dass die Stühle im Testlauf vor der Erhebung auf anderen Oberflächen platziert wurden. Nach einer Rekalibration werden plausible Werte gemeldet. 
+
+Am Münsterhof wurden für Veranstaltungen die Stühle Ende September entfernt. In diesem Zeitraum gab es keine Erhebungen am Münsterhof. Nachdem der Werkhof Anfang Oktober, die Zählgeräte wieder auf dem Münsterhof plaziert hat, konnten noch für die letzten zwei Tage der Erhebung Nutzungsinformationen ermittelt werden.
 ![alt text](https://github.com/floriafa/moveandchill/blob/main/tage.png)
 
 ![alt text](https://github.com/floriafa/moveandchill/blob/main/Tagesgang.png)
