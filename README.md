@@ -17,6 +17,12 @@ Die von den Sitzsensoren gesammelten Daten sind öffentlich zugänglich.
 https://data.stadt-zuerich.ch/dataset/geo_move_and_chill  
 https://opendata.swiss/en/dataset/move-and-chill
 
+## Code:
+
+```R
+spdf <- geojsonsf::geojson_sf("https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Move_and_Chill?service=WFS&version=1.1.0&request=GetFeature&outputFormat=GeoJSON&typename=view_moveandchill")
+```
+
 ## Auswertung:  
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert.   
 
