@@ -17,7 +17,16 @@ Die von den Sitzsensoren gesammelten Daten sind öffentlich zugänglich.
 https://data.stadt-zuerich.ch/dataset/geo_move_and_chill  
 https://opendata.swiss/en/dataset/move-and-chill
 
-## Code:
+## Code
+Genutzte Pakete:
+```R
+library(tidyverse)
+library(sf)
+library(magrittr)
+library(units)
+library(lubridate)
+library(geojsonsf)
+```
 
 Einlesen der Erhebungsdaten:
 ```R
@@ -27,6 +36,45 @@ spdf <- geojsonsf::geojson_sf("https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Mo
 Transformation ins übliche Koordinatensystem "CH1903+ / LV95" EPSG Code: 2056
 ```R
 spdf = st_transform(spdf, crs = 2056)
+```
+
+Aufbereitung des Dataframes:
+```R
+# Zeitformat mit Lubridate umwandeln
+spdf$TIME = ymd_hms(spdf$zeitpunkt, tz = "Europe/Zurich")
+# Um die 30 Min. der durchschnittlich richtigen Halbstunde zuzuweisen, werden 15 Min. abgezogen. 
+spdf$TIME = spdf$TIME - minutes(15)
+
+# Zeitbestandteile für Aggregationen:
+spdf$DATE = date(spdf$TIME)
+spdf$YEAR = year(spdf$TIME)
+spdf$MONTH = month(spdf$TIME)
+spdf$DAY = day(spdf$TIME)
+spdf$HOUR = hour(spdf$TIME)
+spdf$MIN = minute(spdf$TIME)
+
+# für 30-Min.-Aggregation:
+spdf$halbstund = spdf$HOUR + floor((spdf$MIN)/30)/2
+
+# X und Y ins Dataframe als Spalten
+spdf <- spdf %>%
+  dplyr::mutate(X = sf::st_coordinates(.)[,1],
+                Y = sf::st_coordinates(.)[,2])
+                
+# Feiertagskalender
+cal = read.csv("Feiertage.csv")
+colnames(cal)[which(colnames(cal) == "Datum")] = "DATE"
+cal$DATE = ymd(cal$DATE)
+
+spdf = left_join(spdf, cal, by = "DATE")
+#spdf = left_join(spdf, FVV.cal(), by = "DATE")
+
+# Tagestypen
+spdf$tagtyp = "Montag bis Donnerstag"
+spdf[spdf$Wochentag == 5, "tagtyp"] = "Freitag"
+spdf[spdf$Wochentag == 6, "tagtyp"] = "Samstag"
+spdf[spdf$Wochentag == 7, "tagtyp"] = "Sonn- und Feiertag"
+spdf[spdf$Feiertag == 1, "tagtyp"] = "Sonn- und Feiertag"
 ```
 
 ## Ergebnisse:  
