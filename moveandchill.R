@@ -235,7 +235,7 @@ ggplot(pdf, aes(x = halbstund, y = humidity, color = Ort)) + geom_boxplot() + fa
        subtitle = "1. September 2022, in Prozent, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich") + 
   theme(legend.position="none")
-ggsave("Luftfeucht.png", width = 10, height = 8, units = "cm")
+ggsave("Luftfeucht.png", width = 20, height = 16, units = "cm")
 
 ggplot(pdf, aes(x = halbstund, y = temperature, color = Ort)) + geom_boxplot() + facet_grid(~Ort) + 
   scale_x_discrete(name = "",
@@ -253,7 +253,7 @@ ggplot(pdf, aes(x = halbstund, y = temperature, color = Ort)) + geom_boxplot() +
        subtitle = "1. September 2022, in Grad Celsius, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich") + 
   theme(legend.position="none")
-ggsave("Temperatur.png", width = 10, height = 8, units = "cm")
+ggsave("Temperatur.png", width = 20, height = 16, units = "cm")
 
 ggplot(pdf, aes(x = halbstund, y = noise, color = Ort)) + geom_boxplot() + facet_grid(~Ort) + 
   scale_x_discrete(name = "",
@@ -271,4 +271,4 @@ ggplot(pdf, aes(x = halbstund, y = noise, color = Ort)) + geom_boxplot() + facet
        subtitle = "1. September 2022, in ??, Halbstunden",
        caption = "Auswertung Tiefbauamt Stadt Zürich") + 
   theme(legend.position="none")
-ggsave("Laerm.png", width = 10, height = 8, units = "cm")
+ggsave("Laerm.png", width = 20, height = 16, units = "cm")
