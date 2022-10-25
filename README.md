@@ -24,6 +24,7 @@ library(tidyverse)
 library(sf)
 library(magrittr)
 library(units)
+library(lubridate)
 ```
 
 Einlesen der Erhebungsdaten:
@@ -192,3 +193,73 @@ ggplot(df.WT, aes(x = halbstund + 0.25, y = mean_sit, color = Ort)) + geom_line(
 
 
 Die einzelnen Wochentage zeigen gut, dass der Münsterhof besonders am Wochenende mehr Sitzende hat als der Vulkanplatz. Der Vulkanplatz verzeichnet gerade am Samstag sehr niedrige Auslastungswerte.
+
+```R
+pdf = spdf %>% sf::st_drop_geometry() %>% filter(DATE == "2022-09-01")
+
+pdf$halbstund = as.factor(pdf$halbstund)
+
+ggplot(pdf, aes(x = halbstund, y = humidity, color = Ort)) + geom_boxplot() + facet_grid(~Ort) + 
+  scale_x_discrete(name = "",
+                     breaks=c(levels(pdf$halbstund)),
+                     labels=c("0","","1","","2","",
+                              "3","","4","","5","",
+                              "6","","7","","8","",
+                              "9","","10","","11","",
+                              "12","","13","","14","",
+                              "15","","16","","17","",
+                              "18","","19","","20","",
+                              "21","","22","","23","")) + theme_bw() + 
+  theme(axis.title.y = element_blank()) + 
+  labs(title = "Move and Chill: Luftfeuchtigkeitsmessung", 
+       subtitle = "1. September 2022, in Prozent, Halbstunden",
+       caption = "Auswertung Tiefbauamt Stadt Zürich") + 
+  theme(legend.position="none")
+ggsave("Luftfeucht.png", width = 10, height = 8, units = "cm")
+```
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/Luftfeucht.png)
+
+```R
+ggplot(pdf, aes(x = halbstund, y = temperature, color = Ort)) + geom_boxplot() + facet_grid(~Ort) + 
+  scale_x_discrete(name = "",
+                   breaks=c(levels(pdf$halbstund)),
+                   labels=c("0","","1","","2","",
+                            "3","","4","","5","",
+                            "6","","7","","8","",
+                            "9","","10","","11","",
+                            "12","","13","","14","",
+                            "15","","16","","17","",
+                            "18","","19","","20","",
+                            "21","","22","","23","")) + theme_bw() + 
+  theme(axis.title.y = element_blank()) + 
+  labs(title = "Move and Chill: Lufttemperatur", 
+       subtitle = "1. September 2022, in Grad Celsius, Halbstunden",
+       caption = "Auswertung Tiefbauamt Stadt Zürich") + 
+  theme(legend.position="none")
+ggsave("Temperatur.png", width = 10, height = 8, units = "cm")
+```
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/Temperatur.png)
+
+```R
+ggplot(pdf, aes(x = halbstund, y = noise, color = Ort)) + geom_boxplot() + facet_grid(~Ort) + 
+  scale_x_discrete(name = "",
+                   breaks=c(levels(pdf$halbstund)),
+                   labels=c("0","","1","","2","",
+                            "3","","4","","5","",
+                            "6","","7","","8","",
+                            "9","","10","","11","",
+                            "12","","13","","14","",
+                            "15","","16","","17","",
+                            "18","","19","","20","",
+                            "21","","22","","23","")) + theme_bw() + 
+  theme(axis.title.y = element_blank()) + 
+  labs(title = "Move and Chill: Lärmmessung", 
+       subtitle = "1. September 2022, in ??, Halbstunden",
+       caption = "Auswertung Tiefbauamt Stadt Zürich") + 
+  theme(legend.position="none")
+ggsave("Laerm.png", width = 10, height = 8, units = "cm")
+```
+
+![alt text](https://github.com/floriafa/moveandchill/blob/main/Laerm.png)
