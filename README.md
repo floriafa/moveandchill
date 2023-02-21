@@ -41,7 +41,7 @@ Aufbereitung des Dataframes:
 ```R
 # Zeitformat mit Lubridate umwandeln
 spdf$TIME = ymd_hms(spdf$zeitpunkt, tz = "Europe/Zurich")
-# Um die 30 Min. der durchschnittlich richtigen Halbstunde zuzuweisen, werden 15 Min. abgezogen. 
+# Um die 30 Min.-Intervalle der durchschnittlich richtigen Halbstunde zuzuweisen, werden 15 Min. abgezogen. 
 spdf$TIME = spdf$TIME - minutes(15)
 
 # Zeitbestandteile für Aggregationen:
@@ -125,9 +125,9 @@ ggplot(df.tage2[df.tage2$Ort %in% c("Vulkanplatz", "Münsterhof"),],
 
 Der Hauptnutzen der Sitzsensoren besteht darin, herauszufinden, wie intensiv das Sitzmobiliar genutzt wird. Die Sensoren erkennen die Nutzung mittels Beschleunigungssensoren. Die Information wird in 15 Minuten-Blocks aggregiert und als Prozentwert abgespeichert.   
 
-Es zeigt sich, dass die Nutzung der Stühle über den Zeitraum leicht abnimmt. Im Durchschnitt waren die Stühle am Münsterhof und Vulkanplatz in etwa zu 10 Prozent genutzt. Am Münsterhof ist die Auslastung etwas höher als am Vulkanplatz.
+Es zeigt sich, dass die Nutzung der Stühle über den Testzeitraum August bis Anfang Oktober leicht abnimmt. Im Durchschnitt waren die Stühle am Münsterhof und Vulkanplatz in etwa zu 10 Prozent genutzt. Am Münsterhof ist die Auslastung etwas höher als am Vulkanplatz.
 
-In den ersten Tagen wurden noch unrealistisch starke Nutzungen gemessen. Das konnte darauf zurückgeführt werden, dass die Stühle im Testlauf vor der Erhebung auf anderen Oberflächen platziert wurden. Nach einer Rekalibration wurden plausible Werte gemeldet. 
+In den ersten Tagen wurden noch unrealistisch starke Nutzungen gemessen. Das konnte darauf zurückgeführt werden, dass die Stühle im Testlauf vor der Erhebung auf anderen Oberflächen platziert wurden. Nach einer Rekalibration wurden plausible Werte übertragen. 
 
 Am Münsterhof wurden für Veranstaltungen die Stühle Ende September entfernt. In diesem Zeitraum gab es keine Erhebungen am Münsterhof. Nachdem der Werkhof Anfang Oktober die Zählgeräte wieder auf dem Münsterhof plaziert hatte, konnten für die letzten zwei Tage noch Nutzungsinformationen erhoben werden.
 
